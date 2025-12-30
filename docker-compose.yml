@@ -1,0 +1,23 @@
+services:
+  db:
+    env_file:
+      - ./.env
+    image: mysql:8.0
+    container_name: app_booking_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      TZ: America/Sao_Paulo
+    ports:
+      - "3306:3306"
+    networks:
+      - database_network
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+networks:
+  database_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
