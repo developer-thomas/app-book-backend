@@ -73,6 +73,7 @@ model Place {
   placeLocation   PlaceLocation?
 
   @@map("places")
+  
 }
 
 model Booking {
@@ -102,7 +103,7 @@ model PlaceLocation {
   createdAt         DateTime @default(now()) @map("created_at")
   updatedAt         DateTime @updatedAt @map("updated_at")
 
-  place             Place    @relation(fields: [placeId], references: [id])
+  place             Place     @relation(fields: [placeId], references: [id])
 
   @@map("place_locations")
 }
