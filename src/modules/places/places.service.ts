@@ -31,7 +31,8 @@ export class PlacesService {
       if (error instanceof BadRequestException) {
         throw error;
       }
-      throw new BadRequestException('Failed to create place');
+    
+      throw new BadRequestException(`Failed to create place: ${error.message || 'Unknown error'}`);
     }
   }
 
@@ -104,12 +105,14 @@ export class PlacesService {
     try {
       // Verificar se o lugar existe
       const placeExists = await this.placeEntity.exists(id);
+
       if (!placeExists) {
         throw new NotFoundException(`Place with ID ${id} not found`);
       }
 
       // Verificar se há reservas ativas
       const hasActiveBookings = await this.placeEntity.hasActiveBookings(id);
+      
       if (hasActiveBookings) {
         throw new BadRequestException('Cannot delete place with active bookings');
       }
@@ -125,6 +128,7 @@ export class PlacesService {
       if (error instanceof NotFoundException || error instanceof BadRequestException) {
         throw error;
       }
+
       throw new BadRequestException('Failed to delete place');
     }
   }

@@ -1,12 +1,15 @@
 import { IsNumber, Min, Max, IsNotEmpty, IsString, IsUrl } from "class-validator";
+import { Type, Transform } from "class-transformer";
 
 export class LocationDto {
+  @Type(() => Number)
   @IsNumber()
   @Min(-90)
   @Max(90)
   @IsNotEmpty()
   lat: number;
 
+  @Type(() => Number)
   @IsNumber()
   @Min(-180)
   @Max(180)
@@ -18,7 +21,6 @@ export class LocationDto {
   address: string;
 
   @IsString()
-  @IsUrl()
   @IsNotEmpty()
   staticMapImageUrl: string;
 }

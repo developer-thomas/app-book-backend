@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreatePlaceDto } from '../dto/create-place.dto';
 import { UpdatePlaceDto } from '../dto/update-place.dto';
@@ -248,9 +248,13 @@ export class PlaceEntity {
   }
 
   async delete(id: number) {
+    await this.prisma.placeLocation.delete({
+      where: { placeId: id }
+    })
+
     return this.prisma.place.delete({
       where: { id }
-    });
+    })
   }
 
   async exists(id: number) {

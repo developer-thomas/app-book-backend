@@ -385,7 +385,7 @@ export class PlacesController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @HttpCode(HttpStatus.OK)
   @ApiOperation({ 
     summary: '🗑️ Deletar lugar',
     description: `
@@ -416,7 +416,7 @@ export class PlacesController {
     type: 'integer'
   })
   @ApiResponse({ 
-    status: 204,
+    status: 200,
     description: 'Lugar deletado com sucesso. Nenhum conteúdo retornado.',
     content: {
       'application/json': {

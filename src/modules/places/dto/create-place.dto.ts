@@ -16,6 +16,7 @@ export class CreatePlaceDto {
   @IsNotEmpty()
   imageUrl: string;
 
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
   price: number;
@@ -26,6 +27,7 @@ export class CreatePlaceDto {
   @IsDateString()
   availableTo: string;
 
+  @Type(() => Number)
   @IsNumber()
   userId: number;
 
